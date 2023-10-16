@@ -5,15 +5,35 @@ document.addEventListener('DOMContentLoaded', function () {
     // Initialize a state array to keep track of the game
     const gameState = new Array(9).fill(null);
     let currentPlayer = 'X'; // Initialize the current player as 'X'
+    let gameWon = false;
 
     // Function to handle square click
     function handleSquareClick(index) {
-        if (gameState[index] === null) {
-            // Check if the square is empty
+        if (!gameWon && gameState[index] === null) {
+            // Check if the square is empty and the game hasn't been won
             squares[index].textContent = currentPlayer; // Display 'X' or 'O'
             squares[index].classList.add(currentPlayer); // Add the 'X' or 'O' class for styling
             gameState[index] = currentPlayer; // Update the game state
+            checkWin(); // Check for a win
             currentPlayer = currentPlayer === 'X' ? 'O' : 'X'; // Toggle the current player
+        }
+    }
+
+    // Function to check for a win
+    function checkWin() {
+        const winningCombinations = [
+            [0, 1, 2], [3, 4, 5], [6, 7, 8], // Rows
+            [0, 3, 6], [1, 4, 7], [2, 5, 8], // Columns
+            [0, 4, 8], [2, 4, 6] // Diagonals
+        ];
+
+        for (const combo of winningCombinations) {
+            const [a, b, c] = combo;
+            if (gameState[a] && gameState[a] === gameState[b] && gameState[a] === gameState[c]) {
+                gameWon = true;
+                document.getElementById('status').textContent = `Congratulations! ${currentPlayer} is the Winner!`;
+                document.getElementById('status').classList.add('you-won');
+            }
         }
     }
 
@@ -33,7 +53,6 @@ document.addEventListener('DOMContentLoaded', function () {
         // Add click event listener to handle square click
         square.addEventListener('click', () => {
             handleSquareClick(index);
-            // You can add code to check for a win or a draw here
         });
         // Add mouseover event listener to handle square mouseover
         square.addEventListener('mouseover', handleSquareMouseOver);
