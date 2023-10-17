@@ -47,6 +47,22 @@ document.addEventListener('DOMContentLoaded', function () {
         this.classList.remove('hover'); // Remove the 'hover' class for styling when the mouse leaves the square
     }
 
+    // Function to reset the game
+    function resetGame() {
+        squares.forEach((square, index) => {
+            square.textContent = ''; // Clear the content of the squares
+            square.classList.remove('X', 'O'); // Remove the 'X' and 'O' classes
+        });
+        gameState.fill(null); // Reset the game state
+        gameWon = false;
+        document.getElementById('status').textContent = 'Move your mouse over a square and click to play an X or an O.'; // Reset the status message
+        document.getElementById('status').classList.remove('you-won'); // Remove the 'you-won' class
+        currentPlayer = 'X'; // Reset the current player to 'X'
+    }
+
+    // Add click event listener to the New Game button to reset the game
+    document.querySelector('.btn').addEventListener('click', resetGame);
+
     // Loop through each square and add the 'square' class
     squares.forEach((square, index) => {
         square.classList.add('square');
