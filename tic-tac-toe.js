@@ -40,7 +40,7 @@ document.addEventListener("DOMContentLoaded", function(){
                         (arr[0] == "X" && arr[4] == "X" && arr[8] == "X") || (arr[2] == "X" && arr[4] == "X" && arr[6] == "X") ) {
                         gameWon = true;
                         // creates a constant called statuDiv and changes the text to display which player has won the game
-                        statusDiv.innerHTML = `"Congratulations! ${currentPlayer} is the Winner!`;
+                        statusDiv.innerHTML = `Congratulations! ${currentPlayer} is the Winner!`;
                         statusDiv.classList.add('you-won');
                     } 
                     currentPlayer = "O";
@@ -61,7 +61,7 @@ document.addEventListener("DOMContentLoaded", function(){
                         (arr[0] == "O" && arr[4] == "O" && arr[8] == "O") || (arr[2] == "O" && arr[4] == "O" && arr[6] == "O") ) {
                         gameWon = true;
                         // creates a constant called statusDiv and changes the text to display which player has won the game
-                        statusDiv.innerHTML = `"Congratulations! ${currentPlayer} is the Winner!`;
+                        statusDiv.innerHTML = `Congratulations! ${currentPlayer} is the Winner!`;
                         statusDiv.classList.add('you-won');
                     }
                     currentPlayer = "X";
