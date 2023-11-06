@@ -19,6 +19,7 @@ document.addEventListener("DOMContentLoaded", function(){
     var arr = Array(9).fill(null);
     var gameWon = false;
     var currentPlayer = "X";
+    var divCount = 0
 
 
     // for loop that iterates through the children in the board div
@@ -32,7 +33,8 @@ document.addEventListener("DOMContentLoaded", function(){
                     this.innerHTML = currentPlayer;
                     arr[i] = currentPlayer;
                     this.classList.add("X");
-                    this.classList.add("occupied");
+                    this.classList.add("occupied"); 
+                    divCount ++;
                     // sets the win conditions and changes the game state (gameWon=true)
                     if ((arr[0] == "X" && arr[1] == "X" && arr[2] == "X") || (arr[3] == "X" && arr[4] == "X" && arr[5] == "X") || 
                         (arr[6] == "X" && arr[7] == "X" && arr[8] == "X") || (arr[0] == "X" && arr[3] == "X" && arr[6] == "X") || 
@@ -42,8 +44,13 @@ document.addEventListener("DOMContentLoaded", function(){
                         // creates a constant called statuDiv and changes the text to display which player has won the game
                         statusDiv.innerHTML = `Congratulations! ${currentPlayer} is the Winner!`;
                         statusDiv.classList.add('you-won');
-                    } 
+                    } else if (divCount == 9 && !gameWon){
+                        statusDiv.innerHTML = `It's a Draw!`;
+                        statusDiv.classList.add('you-draw');
+                        gameWon = True; 
+                    }
                     currentPlayer = "O";
+
                 }
             }
             // if it is O's turn the square will display O 
@@ -54,6 +61,7 @@ document.addEventListener("DOMContentLoaded", function(){
                     arr[i] = currentPlayer;
                     this.classList.add("O");
                     this.classList.add("occupied");
+                    divCount ++;
                     // sets the win conditions and changes the game state (gameWon=true)
                     if ((arr[0] == "O" && arr[1] == "O" && arr[2] == "O") || (arr[3] == "O" && arr[4] == "O" && arr[5] == "O") || 
                         (arr[6] == "O" && arr[7] == "O" && arr[8] == "O") || (arr[0] == "O" && arr[3] == "O" && arr[6] == "O") || 
@@ -63,6 +71,10 @@ document.addEventListener("DOMContentLoaded", function(){
                         // creates a constant called statusDiv and changes the text to display which player has won the game
                         statusDiv.innerHTML = `Congratulations! ${currentPlayer} is the Winner!`;
                         statusDiv.classList.add('you-won');
+                    } else if (divCount == 9 && !gameWon){
+                        statusDiv.innerHTML = `It's a Draw!`;
+                        statusDiv.classList.add('you-draw');
+                        gameWon = True; 
                     }
                     currentPlayer = "X";
                 }
@@ -84,6 +96,7 @@ document.addEventListener("DOMContentLoaded", function(){
         arr = Array(9).fill(null);
         gameWon = false;
         currentPlayer = "X";
+        divCount = 0;
         // remove the X and O classes and the respective text from the squares
         for (let i = 0; i < board.childElementCount; i++){
             boardSquares[i].classList.remove("X");
@@ -93,6 +106,7 @@ document.addEventListener("DOMContentLoaded", function(){
         }
         // removes the you-won style from the status div and changes the message within back to the original
         statusDiv.classList.remove("you-won");
+        statusDiv.classList.remove('you-draw');
         statusDiv.innerHTML = "Move your mouse over a square and click to play an X or an O.";
     })
 });
